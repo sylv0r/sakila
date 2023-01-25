@@ -8,7 +8,12 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
+        Query selectQuery = new Query("db");
+        ResultSet rs = selectQuery.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'sakila';");
 
-        Create.create("city", "city, country_id", "'test2_city', '2'");
+        while (rs.next()) {
+            System.out.println(rs.getString("table_name"));
+        }
+        //Create.create("city", "city, country_id", "'test2_city', '2'");
     }
 }
