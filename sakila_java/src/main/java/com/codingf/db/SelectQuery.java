@@ -4,10 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Select extends Connection {
+public class SelectQuery extends Connection {
     java.sql.Connection connection;
 
-    public Select(String properties) throws SQLException {
+    public SelectQuery(String properties) throws SQLException {
         super(properties);
     }
 
@@ -17,10 +17,6 @@ public class Select extends Connection {
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-            String city = rs.getString("city");
-            System.out.println(city);
-        }
-        return null;
+        return rs;
     }
 }
