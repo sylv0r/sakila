@@ -3,6 +3,7 @@ package com.codingf.db;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Query extends Connection {
     java.sql.Connection connection;
@@ -18,5 +19,10 @@ public class Query extends Connection {
         ResultSet rs = ps.executeQuery();
 
         return rs;
+    }
+    @Override
+    public int executeUpdate(String query) throws SQLException{
+        Statement stmt = getConnection().createStatement();
+        return stmt.executeUpdate(query);
     }
 }
