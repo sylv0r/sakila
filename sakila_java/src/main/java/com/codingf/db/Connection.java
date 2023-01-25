@@ -39,7 +39,6 @@ public abstract class Connection {
 
     public abstract int executeUpdate(String query) throws SQLException;
 
-
     public java.sql.Connection getConnection() {
         return connection;
     }
