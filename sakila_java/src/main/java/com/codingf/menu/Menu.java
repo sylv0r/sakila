@@ -72,6 +72,9 @@ public class Menu {
             case 4:
                 System.out.println("Vous avez choisi l'option 4.");
 
+
+
+
                 break;
             case 5:
                 System.out.println("Vous avez choisi l'option 4.");
