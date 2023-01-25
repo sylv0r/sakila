@@ -1,6 +1,8 @@
 package com.codingf.menu;
 
+import com.codingf.create.Create;
 import com.codingf.db.Query;
+import com.codingf.read.Read;
 import com.codingf.update.Update;
 
 import java.sql.ResultSet;
@@ -42,18 +44,23 @@ public class Menu {
         System.out.println("3. Modifier un tuple");
         System.out.println("4. Surimer un tuple ");
         choice = scanner.nextInt();
+        String champ;
         switch (choice){
             case 1:
-                System.out.println("Vous avez choisi l'option 1.");
-                //Read.read("*", tableMap.get(choiceTable))
+                System.out.println("table : "+tableMap.get(choiceTable));
+                Read.read("*", tableMap.get(choiceTable));
                 break;
             case 2:
-                System.out.println("Vous avez choisi l'option 2.");
+
+                System.out.println("Veuillez remplir ces champs :");
+                String all_fields = getFields(tableMap.get(choiceTable));
+                champ = afficher_champ_no_null(tableMap.get(choiceTable));
+                Create.create(tableMap.get(choiceTable),all_fields,champ);
 
                 break;
             case 3:
                 System.out.println("Veuillez choisir un champ");
-                String champ = afficher_champ(tableMap.get(choiceTable));
+                champ = afficher_champ(tableMap.get(choiceTable));
                 System.out.println("Veuillez choisir la valeur");
                 String valeur = scanner.next();
                 System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
@@ -75,6 +82,20 @@ public class Menu {
         }
     }
 
+    public static String getFields(String table) throws SQLException {
+        Query selectQuery = new Query("db");
+        String return_string = "";
+
+        ResultSet rs = selectQuery.executeQuery("SHOW COLUMNS FROM "+table+";");
+        while (rs.next()) {
+            String champ = rs.getString("Field");
+            if (Objects.equals(rs.getString("Extra"), "")) {
+                return_string+=rs.getString("Field")+",";
+            }
+        }
+        return return_string.substring(0, return_string.length()-1);
+    }
+
     public static String afficher_champ(String table) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         Query selectQuery = new Query("db");
@@ -94,5 +115,25 @@ public class Menu {
 
 
         return tableMap.get(choiceChamp);
+    }
+
+    public static String afficher_champ_no_null(String table) throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        Query selectQuery = new Query("db");
+        int i = 1;
+        Map<String, String> tableMap = new HashMap<String, String>();
+
+        ResultSet rs = selectQuery.executeQuery("SHOW COLUMNS FROM "+table+";");
+        while (rs.next()) {
+            String champ = rs.getString("Field");
+            if (Objects.equals(rs.getString("Extra"), "")) {
+                tableMap.put(Integer.toString(i), champ);
+                System.out.println(champ);
+                i += 1;
+            }
+        }
+        System.out.println("Au format 'valeur1','valeur2' (sans espace) dans l'ordre d'apparition");
+        String choiceChamp = scanner.next();
+        return choiceChamp;
     }
 }

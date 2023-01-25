@@ -9,7 +9,9 @@ public class Create {
     public static void create(String table_name, String fields, String values) throws SQLException {
         Query selectQuery = new Query("db");
         try {
-            int result = selectQuery.executeUpdate("INSERT INTO `" + table_name + "` (" + fields + ") VALUES (" + values + ");");
+            String sql = "INSERT INTO `" + table_name + "` (" + fields + ") VALUES (" + values + ");";
+            System.out.println(sql);
+            int result = selectQuery.executeUpdate(sql);
             System.out.println("Nombre de lignes affectées : " + result);
 
             ResultSet rs = selectQuery.executeQuery("SELECT * FROM city");
@@ -18,6 +20,7 @@ public class Create {
                 System.out.println(city);
             }
         } catch (SQLException e) {
+            System.out.println(e);
             System.out.println("Une information est incorrecte, veuillez-réessayer");
         }
     }
