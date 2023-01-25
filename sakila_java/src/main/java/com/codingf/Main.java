@@ -50,6 +50,7 @@ public class Main {
             }
         }
 
+
         ResultSet city= stmt.executeQuery("SELECT * FROM city");
 
         while(city.next()){
