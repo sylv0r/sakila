@@ -4,10 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SelectQuery extends Connection {
+public class Query extends Connection {
     java.sql.Connection connection;
 
-    public SelectQuery(String properties) throws SQLException {
+    public Query(String properties) throws SQLException {
         super(properties);
     }
 
