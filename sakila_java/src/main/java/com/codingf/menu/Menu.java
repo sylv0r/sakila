@@ -21,7 +21,6 @@ public class Menu {
 
             Query selectQuery = new Query("db");
             int i = 1;
-            int choice;
 
             Map<String, String> tableMap = new HashMap<String, String>();
             Scanner scanner = new Scanner(System.in);
@@ -47,19 +46,47 @@ public class Menu {
             }
             System.out.println("");
 
-            System.out.print("Votre choix : ");
-
-            String choiceTable = scanner.next();
+            String choiceTable;
+            while (true) {
+                System.out.print("Votre choix : ");
+                choiceTable = scanner.next();
+                try {
+                    int choiceTableNb = Integer.parseInt(choiceTable);
+                    if (choiceTableNb < 1 || choiceTableNb > 23) {
+                        System.err.println("Veuillez choisir un nombre correct");
+                    } else {
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.err.println("Veuillez choisir un nombre correct");
+                }
+            }
 
             System.out.println(tableMap.get(choiceTable));
             i = 1;
 
-            System.out.println("Que voulez-vous faire avec la table " + tableMap.get(choiceTable));
-            System.out.println("1. Afficher");
-            System.out.println("2. Créer un nouveau tuple");
-            System.out.println("3. Modifier un tuple");
-            System.out.println("4. Surimer un tuple ");
-            choice = scanner.nextInt();
+
+            String choiceStr;
+            int choice;
+            while (true) {
+                System.out.println("Que voulez-vous faire avec la table " + tableMap.get(choiceTable));
+                System.out.println("1. Afficher");
+                System.out.println("2. Créer un nouveau tuple");
+                System.out.println("3. Modifier un tuple");
+                System.out.println("4. Surimer un tuple ");
+                choiceStr = scanner.next();
+                try {
+                    choice = Integer.parseInt(choiceStr);
+                    if (choice < 1 || choice > 4) {
+                        System.err.println("Veuillez choisir un nombre correct");
+                    } else {
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.err.println("Veuillez choisir un nombre correct");
+                }
+            }
+
             String champ;
             switch (choice) {
                 case 1:
