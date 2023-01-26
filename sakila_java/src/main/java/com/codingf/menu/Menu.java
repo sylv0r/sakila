@@ -2,10 +2,12 @@ package com.codingf.menu;
 
 import com.codingf.create.Create;
 import com.codingf.db.Query;
+import com.codingf.delete.Delete;
 import com.codingf.read.Read;
 import com.codingf.update.Update;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,15 +23,26 @@ public class Menu {
         Map<String, String> tableMap = new HashMap<String, String>();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Menu:");
+        System.out.println("Bienvenue dans le meilleur explorateur de bdd.\n Appuyez sur entré pour afficher les tables");
+        String enter = scanner.nextLine();
 
         ResultSet rs = selectQuery.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'sakila';");
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+// Affichage des noms de colonnes
+        System.out.printf("%-20s", metaData.getColumnName(1));
+        System.out.println();
+        System.out.println("---------------------------------------");
+
+// Affichage des données
         while (rs.next()) {
-            String table = rs.getString("table_name");
-            tableMap.put(Integer.toString(i), table);
-            System.out.println(i + "/" + " " + table);
-            i += 1;
+            for (int column = 1; column <= columnCount; column++) {
+                System.out.printf("%-20s", rs.getString(column));
+            }
+            System.out.println();
         }
+
 
         System.out.print("Votre choix : ");
 
@@ -70,10 +83,10 @@ public class Menu {
 
                 break;
             case 4:
-                System.out.println("Vous avez choisi l'option 4.");
 
-
-
+                System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
+                String wheree = scanner.next();
+                Delete.delete(tableMap.get(choiceTable),wheree);
 
                 break;
             case 5:
