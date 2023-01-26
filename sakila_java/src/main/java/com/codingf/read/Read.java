@@ -7,10 +7,10 @@ import com.codingf.db.Query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 public class Read {
-    public static void read(String select, String from) throws SQLException {
+    public static void read(String from) throws SQLException {
 
         Query selectQuery = new Query("db");
-        ResultSet rs = selectQuery.executeQuery("SELECT "+select+" FROM "+from+";");
+        ResultSet rs = selectQuery.executeQuery("SELECT * FROM "+from+";");
 
         // Récupération des métadonnées de la requête
         ResultSetMetaData metaData = rs.getMetaData();
