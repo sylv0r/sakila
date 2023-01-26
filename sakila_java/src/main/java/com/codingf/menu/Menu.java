@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class Menu {
     public static void menu() throws SQLException {
+        while (true) {
 
 
             Query selectQuery = new Query("db");
@@ -45,30 +46,54 @@ public class Menu {
 
                 System.out.println("");
 
-
-                    System.out.print("Votre choix : ");
-
-
-                    String choiceTable = scanner.next();
+            String choiceTable;
+            while (true) {
+                System.out.print("Votre choix : ");
+                choiceTable = scanner.next();
+                try {
+                    int choiceTableNb = Integer.parseInt(choiceTable);
+                    if (choiceTableNb < 1 || choiceTableNb > 23) {
+                        System.err.println("Veuillez choisir un nombre correct");
+                    } else {
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.err.println("Veuillez choisir un nombre correct");
+                }
+            }
 
                     System.out.println(tableMap.get(choiceTable));
                     i = 1;
 
-                    System.out.println("Que voulez-vous faire avec la table " + tableMap.get(choiceTable));
-                    System.out.println("1. Afficher");
-                    System.out.println("2. Créer un nouveau tuple");
-                    System.out.println("3. Modifier un tuple");
-                    System.out.println("4. Surimer un tuple ");
-                    System.out.println("5. Retour");
-                    System.out.println("6. Quitter");
-                    choice = scanner.nextInt();
-                    String champ;
-                    switch (choice) {
-                        case 1:
-                            System.out.println("table : " + tableMap.get(choiceTable));
-                            Read.read(tableMap.get(choiceTable));
-                            break;
-                        case 2:
+
+            String choiceStr;
+            int choice;
+            while (true) {
+                System.out.println("Que voulez-vous faire avec la table " + tableMap.get(choiceTable));
+                System.out.println("1. Afficher");
+                System.out.println("2. Créer un nouveau tuple");
+                System.out.println("3. Modifier un tuple");
+                System.out.println("4. Surimer un tuple ");
+                choiceStr = scanner.next();
+                try {
+                    choice = Integer.parseInt(choiceStr);
+                    if (choice < 1 || choice > 4) {
+                        System.err.println("Veuillez choisir un nombre correct");
+                    } else {
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.err.println("Veuillez choisir un nombre correct");
+                }
+            }
+
+            String champ;
+            switch (choice) {
+                case 1:
+                    System.out.println("table : " + tableMap.get(choiceTable));
+                    Read.read(tableMap.get(choiceTable));
+                    break;
+                case 2:
 
                             System.out.println("Veuillez remplir ces champs :");
                             String all_fields = getFields(tableMap.get(choiceTable));
