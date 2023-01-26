@@ -73,11 +73,13 @@ public class Menu {
                     System.out.println("1. Afficher");
                     System.out.println("2. Créer un nouveau tuple");
                     System.out.println("3. Modifier un tuple");
-                    System.out.println("4. Surimer un tuple ");
+                    System.out.println("4. Supprimer un tuple ");
+                    System.out.println("5. Retour ");
+                    System.out.println("6. Quitter ");
                     choiceStr = scanner.next();
                     try {
                         choice = Integer.parseInt(choiceStr);
-                        if (choice < 1 || choice > 4) {
+                        if (choice < 1 || choice > 6) {
                             System.err.println("Veuillez choisir un nombre correct");
                         } else {
                             break;
