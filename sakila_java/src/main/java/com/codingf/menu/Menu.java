@@ -16,7 +16,6 @@ import java.util.Scanner;
 
 public class Menu {
     public static void menu() throws SQLException {
-        while (true) {
 
 
             Query selectQuery = new Query("db");
@@ -29,78 +28,85 @@ public class Menu {
             System.out.println("Bienvenue dans le meilleur explorateur de bdd.\n Appuyez sur entré pour afficher les tables");
             String enter = scanner.nextLine();
 
-            ResultSet rs = selectQuery.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'sakila';");
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
+            while (true) {
 
-            // Affichage des noms de colonnes
-            System.out.printf("%-20s", metaData.getColumnName(1));
-            System.out.println();
-            System.out.println("---------------------------------------");
+                ResultSet rs = selectQuery.executeQuery("SELECT table_name FROM information_schema.tables WHERE table_schema = 'sakila';");
+
+                System.out.printf("%-5s %-20s\n", "Num", "Table Name");
+                System.out.println("--------------------------------------------------");
+
+                while (rs.next()) {
+                    String table = rs.getString("table_name");
+                    tableMap.put(Integer.toString(i), table);
+                    System.out.printf("%-5s %-20s\n", i, table);
+                    i++;
+                }
 
 
-            while (rs.next()) {
-                String table = rs.getString("table_name");
-                tableMap.put(Integer.toString(i), table);
-                System.out.println(i + "/" + " " + table);
-                i += 1;
-            }
-            System.out.println("");
+                System.out.println("");
 
-            System.out.print("Votre choix : ");
 
-            String choiceTable = scanner.next();
+                    System.out.print("Votre choix : ");
 
-            System.out.println(tableMap.get(choiceTable));
-            i = 1;
 
-            System.out.println("Que voulez-vous faire avec la table " + tableMap.get(choiceTable));
-            System.out.println("1. Afficher");
-            System.out.println("2. Créer un nouveau tuple");
-            System.out.println("3. Modifier un tuple");
-            System.out.println("4. Surimer un tuple ");
-            choice = scanner.nextInt();
-            String champ;
-            switch (choice) {
-                case 1:
-                    System.out.println("table : " + tableMap.get(choiceTable));
-                    Read.read(tableMap.get(choiceTable));
-                    break;
-                case 2:
+                    String choiceTable = scanner.next();
 
-                    System.out.println("Veuillez remplir ces champs :");
-                    String all_fields = getFields(tableMap.get(choiceTable));
-                    champ = afficher_champ_no_null(tableMap.get(choiceTable));
-                    Create.create(tableMap.get(choiceTable), all_fields, champ);
+                    System.out.println(tableMap.get(choiceTable));
+                    i = 1;
 
-                    break;
-                case 3:
-                    System.out.println("Veuillez choisir un champ");
-                    champ = afficher_champ(tableMap.get(choiceTable));
-                    System.out.println("Veuillez choisir la valeur");
-                    String valeur = scanner.next();
-                    System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
-                    String where = scanner.next();
+                    System.out.println("Que voulez-vous faire avec la table " + tableMap.get(choiceTable));
+                    System.out.println("1. Afficher");
+                    System.out.println("2. Créer un nouveau tuple");
+                    System.out.println("3. Modifier un tuple");
+                    System.out.println("4. Surimer un tuple ");
+                    System.out.println("5. Retour");
+                    System.out.println("6. Quitter");
+                    choice = scanner.nextInt();
+                    String champ;
+                    switch (choice) {
+                        case 1:
+                            System.out.println("table : " + tableMap.get(choiceTable));
+                            Read.read(tableMap.get(choiceTable));
+                            break;
+                        case 2:
 
-                    Update.update(tableMap.get(choiceTable), champ, valeur, where);
+                            System.out.println("Veuillez remplir ces champs :");
+                            String all_fields = getFields(tableMap.get(choiceTable));
+                            champ = afficher_champ_no_null(tableMap.get(choiceTable));
+                            Create.create(tableMap.get(choiceTable), all_fields, champ);
 
-                    break;
-                case 4:
+                            break;
+                        case 3:
+                            System.out.println("Veuillez choisir un champ");
+                            champ = afficher_champ(tableMap.get(choiceTable));
+                            System.out.println("Veuillez choisir la valeur");
+                            String valeur = scanner.next();
+                            System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
+                            String where = scanner.next();
 
-                    System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
-                    String wheree = scanner.next();
-                    Delete.delete(tableMap.get(choiceTable), wheree);
+                            Update.update(tableMap.get(choiceTable), champ, valeur, where);
 
-                    break;
-                case 5:
-                    System.out.println("Vous avez choisi l'option 4.");
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Veuillez choisir un bon choix.");
-            }
+                            break;
+                        case 4:
+
+                            System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
+                            String wheree = scanner.next();
+                            Delete.delete(tableMap.get(choiceTable), wheree);
+
+                            break;
+                        case 5:
+                            System.out.println("Retour.");
+                            break;
+                        case 6:
+                            System.out.println("Vous quitez le programe");
+                            System.exit(0);
+                            break;
+                        default:
+                            System.out.println("Veuillez choisir un bon choix.");
+                    }
+                }
         }
-    }
+
 
     public static String getFields(String table) throws SQLException {
         Query selectQuery = new Query("db");
