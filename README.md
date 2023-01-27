@@ -5,7 +5,7 @@ Sylvian Vidal
 Zinebe Ajabboune
 
 Guillaume : Afficher les donnée
-Sylvian Vydale: Menu utilisateur, menu, retour
+Sylvian Vidal: Menu utilisateur, menu, retour
 Raphaël Guillot: Ajouter dans la BD, menu
 Zinebe Ajabboune: Supprimer des données
 
