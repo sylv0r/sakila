@@ -25,7 +25,7 @@ public abstract class Connection {
             input = new FileReader(fileName);
             props.load(input);
         } catch (IOException e) {
-            System.err.println("Error lors du chargement des properties :" + e.getMessage());
+            System.err.println("Erreur lors du chargement des properties :" + e.getMessage());
         }
         // for debug
         props.list(System.out);
