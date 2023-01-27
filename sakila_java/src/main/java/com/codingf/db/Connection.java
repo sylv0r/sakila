@@ -18,7 +18,7 @@ public abstract class Connection {
 
     private static Properties properties;
     private static Properties getFileProperties(String fileName) {
-        System.out.println("file properties name :" + fileName);
+
         Properties props = new Properties();
         FileReader input ;
         try {
@@ -28,7 +28,7 @@ public abstract class Connection {
             System.err.println("Erreur lors du chargement des properties :" + e.getMessage());
         }
         // for debug
-        props.list(System.out);
+
         return props;
     }
 

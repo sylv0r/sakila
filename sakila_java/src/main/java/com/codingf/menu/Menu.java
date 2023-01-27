@@ -18,7 +18,7 @@ public class Menu {
     public static void menu() throws SQLException {
         String espace = "\n\n\n";
         while (true) {
-
+            System.out.println(espace);
             Query selectQuery = new Query("db");
             int i = 1;
             int choice;
@@ -26,7 +26,7 @@ public class Menu {
             Map<String, String> tableMap = new HashMap<String, String>();
             Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Bienvenue dans le meilleur explorateur de bdd.\n Appuyez sur entré pour afficher les tables");
+            System.out.println("Bienvenue dans le meilleur explorateur de bdd.\n"+"Appuyez sur entré pour afficher les tables");
             String enter = scanner.nextLine();
 
             while (true) {
@@ -116,9 +116,9 @@ public class Menu {
                     case 3:
                         System.out.println("Veuillez choisir un champ");
                         champ = afficher_champ(tableMap.get(choiceTable));
-                        System.out.println("Veuillez choisir la valeur");
+                        System.out.println("Veuillez choisir la valeur que vous voulez attribuer ");
                         String valeur = scanner.next();
-                        System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
+                        System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' ( exemple: country='france' )");
                         String where = scanner.next();
 
                         Update.update(tableMap.get(choiceTable), champ, valeur, where);
