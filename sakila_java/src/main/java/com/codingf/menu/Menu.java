@@ -16,8 +16,8 @@ import java.util.Scanner;
 
 public class Menu {
     public static void menu() throws SQLException {
+        String espace = "\n\n\n";
         while (true) {
-
 
             Query selectQuery = new Query("db");
             int i = 1;
@@ -47,8 +47,13 @@ public class Menu {
                 System.out.println("");
 
                 String choiceTable;
+
+
+
+
                 while (true) {
                     System.out.print("Votre choix : ");
+
                     choiceTable = scanner.next();
                     try {
                         int choiceTableNb = Integer.parseInt(choiceTable);
@@ -62,12 +67,12 @@ public class Menu {
                     }
                 }
 
-                System.out.println(tableMap.get(choiceTable));
+
                 i = 1;
 
 
                 String choiceStr;
-
+                System.out.println(espace);
                 while (true) {
                     System.out.println("Que voulez-vous faire avec la table " + tableMap.get(choiceTable));
                     System.out.println("1. Afficher");
@@ -92,15 +97,20 @@ public class Menu {
                 String champ;
                 switch (choice) {
                     case 1:
+
                         System.out.println("table : " + tableMap.get(choiceTable));
                         Read.read(tableMap.get(choiceTable));
+                        System.out.println(espace);
+
                         break;
+
                     case 2:
 
                         System.out.println("Veuillez remplir ces champs :");
                         String all_fields = getFields(tableMap.get(choiceTable));
                         champ = afficher_champ_no_null(tableMap.get(choiceTable));
                         Create.create(tableMap.get(choiceTable), all_fields, champ);
+                        System.out.println(espace);
 
                         break;
                     case 3:
@@ -112,6 +122,7 @@ public class Menu {
                         String where = scanner.next();
 
                         Update.update(tableMap.get(choiceTable), champ, valeur, where);
+                        System.out.println(espace);
 
                         break;
                     case 4:
@@ -119,18 +130,24 @@ public class Menu {
                         System.out.println("Veuillez choisir la condition sous la forme : champsigne'valeur' (exemple: country='france' ");
                         String wheree = scanner.next();
                         Delete.delete(tableMap.get(choiceTable), wheree);
+                        System.out.println(espace);
 
                         break;
                     case 5:
                         System.out.println("Retour.");
+                        System.out.println(espace);
                         break;
                     case 6:
                         System.out.println("Vous quitez le programe");
                         System.exit(0);
+                        System.out.println(espace);
                         break;
                     default:
                         System.out.println("Veuillez choisir un bon choix.");
+                        System.out.println(espace);
                 }
+
+
             }
         }
     }

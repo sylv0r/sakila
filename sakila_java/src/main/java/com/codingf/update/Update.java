@@ -14,6 +14,7 @@ public class Update {
 
             System.out.println("Nombre de lignes affectées : " + result);
             ResultSet rs = selectQuery.executeQuery("SELECT * FROM "+update+";");
+
             while (rs.next()) {
                 String city = rs.getString(set);
                 System.out.println(city);

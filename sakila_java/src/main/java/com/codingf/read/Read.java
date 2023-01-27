@@ -7,6 +7,7 @@ import com.codingf.db.Query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 public class Read {
+
     public static void read(String from) throws SQLException {
 
         Query selectQuery = new Query("db");
