@@ -1,7 +1,7 @@
 Groupe 1 : 
 Guillaume Depecker
 Raphaël Guillot
-Sylvian Vydale
+Sylvian Vidal
 Zinebe Ajabboune
 
 Guillaume : Afficher les donnée
