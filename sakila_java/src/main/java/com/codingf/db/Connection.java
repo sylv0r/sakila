@@ -34,7 +34,7 @@ public abstract class Connection {
 
     public Connection(String properties) throws SQLException {
 
-        Properties prop = getFileProperties("/Users/sylvian/Documents/GitHub/sakila/sakila/sakila_java");
+        Properties prop = getFileProperties("sakila_java/db.properties");
 
         //ResourceBundle db = ResourceBundle.getBundle(properties);
 
