@@ -5,8 +5,8 @@ Sylvian Vydale
 Zinebe Ajabboune
 
 Guillaume : Afficher les donnée
-Sylvian Vydale: Menu utilisateur
-Raphaël Guillot: Ajouter dans la BD
+Sylvian Vydale: Menu utilisateur, menu
+Raphaël Guillot: Ajouter dans la BD, menu
 Zinebe Ajabboune: Supprimer des données
 
 faire un Crud sur une base de donnée nommée sakila
